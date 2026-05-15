@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maaltijdplan · Mei – Juni 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,800;0,9..144,900;1,9..144,400;1,9..144,600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================
+   THEME — Warm Editorial / Kookboek
+   ============================ */
+:root {
+    --paper: #f4ecdc;
+    --paper-deep: #ebe0c8;
+    --ink: #1f1810;
+    --ink-soft: #4a3d2c;
+    --rust: #b8512a;
+    --rust-deep: #8a3a1d;
+    --olive: #5a6b3a;
+    --olive-deep: #3f4a28;
+    --mustard: #c8932a;
+    --cream: #faf4e6;
+    --shadow: rgba(31, 24, 16, 0.12);
+    --shadow-deep: rgba(31, 24, 16, 0.25);
+    --line: rgba(31, 24, 16, 0.15);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inter Tight', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    background-image:
+        radial-gradient(circle at 20% 10%, rgba(184, 81, 42, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(90, 107, 58, 0.05) 0%, transparent 50%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.12 0 0 0 0 0.09 0 0 0 0 0.06 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============================
+   LAYOUT
+   ============================ */
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+}
+
+header.masthead {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 32px;
+    margin-bottom: 48px;
+    position: relative;
+}
+
+.masthead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+}
+
+.masthead-top .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--rust);
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+h1.title {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+}
+
+h1.title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--rust);
+}
+
+.subtitle {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--ink-soft);
+    margin-top: 16px;
+    max-width: 600px;
+}
+
+/* ============================
+   TABS / NAV
+   ============================ */
+.tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--line);
+    overflow-x: auto;
+}
+
+.tab {
+    background: none;
+    border: none;
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    padding: 16px 24px;
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+    transition: color 0.2s;
+}
+
+.tab:hover { color: var(--ink); }
+
+.tab.active {
+    color: var(--ink);
+}
+
+.tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 16px;
+    right: 16px;
+    height: 3px;
+    background: var(--rust);
+}
+
+.tab .badge {
+    display: inline-block;
+    background: var(--rust);
+    color: var(--cream);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 8px;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+.view { display: none; }
+.view.active { display: block; animation: fadeIn 0.3s ease; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================
+   CALENDAR
+   ============================ */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.calendar-header h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 32px;
+}
+
+.calendar-nav {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.cal-btn {
+    background: var(--cream);
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    transition: all 0.15s;
+}
+
+.cal-btn:hover {
+    background: var(--ink);
+    color: var(--cream);
+}
+
+.month-label {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    font-weight: 600;
+    min-width: 200px;
+    text-align: center;
+}
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.weekday {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-soft);
+    text-align: center;
+    padding: 8px 0;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.day {
+    aspect-ratio: 1 / 1.1;
+    background: var(--cream);
+    border: 1px solid var(--line);
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.day:hover {
+    border-color: var(--ink);
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0 var(--shadow);
+}
+
+.day.empty {
+    background: transparent;
+    border: 1px dashed var(--line);
+    cursor: default;
+}
+
+.day.empty:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--line);
+}
+
+.day.today {
+    background: var(--ink);
+    color: var(--cream);
+    border-color: var(--ink);
+}
+
+.day.today .day-num,
+.day.today .day-meal { color: var(--cream); }
+
+.day.today .meal-icon { filter: invert(1); }
+
+.day-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1;
+}
+
+.day-meal {
+    font-size: 10px;
+    color: var(--ink-soft);
+    margin-top: auto;
+    line-height: 1.2;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.meal-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+/* ============================
+   MODAL
+   ============================ */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(31, 24, 16, 0.6);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 20px;
+}
+
+.modal-overlay.active {
+    display: flex;
+    animation: fadeIn 0.2s ease;
+}
+
+.modal {
+    background: var(--cream);
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    border: 2px solid var(--ink);
+    box-shadow: 12px 12px 0 var(--ink);
+    position: relative;
+    animation: modalIn 0.3s ease;
+}
+
+@keyframes modalIn {
+    from { opacity: 0; transform: scale(0.95) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--ink);
+    color: var(--cream);
+    border: none;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 2;
+    transition: background 0.15s;
+}
+
+.modal-close:hover { background: var(--rust); }
+
+.modal-header {
+    padding: 32px 40px 20px;
+    border-bottom: 1px solid var(--line);
+    background: var(--paper-deep);
+}
+
+.modal-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+}
+
+.modal-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+}
+
+.modal-body {
+    padding: 32px 40px 40px;
+}
+
+.meal-section {
+    margin-bottom: 32px;
+}
+
+.meal-section:last-child { margin-bottom: 0; }
+
+.meal-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--rust);
+    margin-bottom: 8px;
+}
+
+.meal-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.recipe-meta {
+    display: flex;
+    gap: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.recipe-meta span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.recipe-section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--rust-deep);
+    margin: 20px 0 8px;
+}
+
+.recipe-ingredients {
+    list-style: none;
+    padding: 0;
+}
+
+.recipe-ingredients li {
+    padding: 6px 0;
+    border-bottom: 1px dotted var(--line);
+    font-size: 14px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.recipe-ingredients li::before {
+    content: '·';
+    color: var(--rust);
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.recipe-method {
+    counter-reset: step;
+    list-style: none;
+    padding: 0;
+}
+
+.recipe-method li {
+    counter-increment: step;
+    padding: 12px 0 12px 36px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.recipe-method li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 10px;
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--rust);
+    width: 24px;
+    text-align: right;
+    border-right: 2px solid var(--rust);
+    padding-right: 6px;
+}
+
+.recipe-note {
+    background: var(--paper-deep);
+    padding: 16px 20px;
+    margin-top: 20px;
+    border-left: 3px solid var(--mustard);
+    font-style: italic;
+    font-family: 'Fraunces', serif;
+    font-size: 14px;
+    color: var(--ink-soft);
+}
+
+.leftover-tag {
+    display: inline-block;
+    background: var(--mustard);
+    color: var(--ink);
+    padding: 4px 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+}
+
+/* ============================
+   SHOPPING LIST
+   ============================ */
+.shopping-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.shopping-controls h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 32px;
+}
+
+.shopping-progress {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+
+.shopping-progress strong {
+    color: var(--rust);
+    font-size: 18px;
+    font-family: 'Fraunces', serif;
+}
+
+.shopping-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.action-btn {
+    background: var(--cream);
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    padding: 8px 16px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: all 0.15s;
+}
+
+.action-btn:hover {
+    background: var(--ink);
+    color: var(--cream);
+}
+
+.action-btn.primary {
+    background: var(--rust);
+    color: var(--cream);
+    border-color: var(--rust);
+}
+
+.action-btn.primary:hover {
+    background: var(--rust-deep);
+    border-color: var(--rust-deep);
+}
+
+.shopping-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.shopping-category {
+    background: var(--cream);
+    border: 1px solid var(--ink);
+    padding: 24px;
+    box-shadow: 6px 6px 0 var(--shadow);
+}
+
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--ink);
+}
+
+.category-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+}
+
+.category-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+}
+
+.shop-list {
+    list-style: none;
+    padding: 0;
+}
+
+.shop-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    cursor: pointer;
+    font-size: 14px;
+    gap: 12px;
+    transition: opacity 0.2s;
+    user-select: none;
+}
+
+.shop-item:hover { opacity: 0.7; }
+
+.shop-checkbox {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--ink);
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+}
+
+.shop-item.checked .shop-checkbox {
+    background: var(--olive);
+    border-color: var(--olive);
+}
+
+.shop-item.checked .shop-checkbox::after {
+    content: '✓';
+    color: var(--cream);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.shop-item.checked .shop-label {
+    text-decoration: line-through;
+    text-decoration-color: var(--olive);
+    color: var(--ink-soft);
+    opacity: 0.6;
+}
+
+.shop-label {
+    flex: 1;
+    transition: all 0.2s;
+}
+
+/* ============================
+   RECIPES VIEW
+   ============================ */
+.recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 24px;
+}
+
+.recipe-card {
+    background: var(--cream);
+    border: 1px solid var(--ink);
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    box-shadow: 4px 4px 0 var(--shadow);
+}
+
+.recipe-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0 var(--ink);
+}
+
+.recipe-card-cat {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--rust);
+    margin-bottom: 8px;
+}
+
+.recipe-card-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.15;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+}
+
+.recipe-card-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+}
+
+.recipe-filter {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: transparent;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    padding: 6px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background: var(--ink);
+    color: var(--cream);
+}
+
+/* ============================
+   THIS WEEK VIEW
+   ============================ */
+.week-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.week-card {
+    background: var(--cream);
+    border: 1px solid var(--ink);
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 4px 4px 0 var(--shadow);
+}
+
+.week-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0 var(--ink);
+}
+
+.week-card.today {
+    background: var(--ink);
+    color: var(--cream);
+}
+
+.week-card.today .week-card-day,
+.week-card.today .week-card-date,
+.week-card.today .week-card-meals { color: var(--cream); }
+
+.week-card-day {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.week-card-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.week-card-meals {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.week-card-meals div {
+    padding: 6px 0;
+    border-bottom: 1px dotted var(--line);
+}
+
+.week-card-meals div:last-child { border-bottom: none; }
+
+.week-card-meals strong {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--rust);
+    display: block;
+    margin-bottom: 2px;
+}
+
+.week-card.today .week-card-meals strong { color: var(--mustard); }
+
+/* ============================
+   TIPS / FOOTER
+   ============================ */
+.tips-section {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 48px;
+    margin-top: 60px;
+    position: relative;
+}
+
+.tips-section h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 36px;
+    margin-bottom: 24px;
+    color: var(--cream);
+}
+
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+}
+
+.tip {
+    border-left: 2px solid var(--mustard);
+    padding-left: 16px;
+}
+
+.tip-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 6px;
+    color: var(--mustard);
+}
+
+.tip-body {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--paper);
+}
+
+footer {
+    text-align: center;
+    padding-top: 60px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-soft);
+}
+
+footer .ornament {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 24px;
+    color: var(--rust);
+    margin-bottom: 8px;
+}
+
+/* ============================
+   RESPONSIVE
+   ============================ */
+@media (max-width: 768px) {
+    .container { padding: 24px 16px 60px; }
+    .day { padding: 6px; }
+    .day-num { font-size: 16px; }
+    .day-meal { display: none; }
+    .meal-icon { font-size: 11px; top: 4px; right: 4px; }
+    .modal-header, .modal-body { padding: 24px 20px; }
+    .modal-title { font-size: 26px; }
+    .tips-section { padding: 32px 20px; }
+    .calendar-header { flex-direction: column; align-items: flex-start; }
+    .weekday { font-size: 9px; padding: 4px 0; }
+    .shopping-controls { flex-direction: column; align-items: flex-start; }
+}
+
+/* Print */
+@media print {
+    .tabs, .shopping-actions, .cal-btn, .modal-close { display: none; }
+    body { background: white; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <header class="masthead">
+        <div class="masthead-top">
+            <span><span class="dot"></span>VEGETARISCH · 30 DAGEN</span>
+            <span id="todayLabel">—</span>
+        </div>
+        <h1 class="title">Een maand <em>plantaardig</em><br>koken</h1>
+        <p class="subtitle">Gezonde vegetarische maaltijden van 20 mei tot 18 juni 2026 — met automatisch geplande restjes voor de lunch van de volgende dag.</p>
+    </header>
+
+    <nav class="tabs">
+        <button class="tab active" data-view="week">Deze week</button>
+        <button class="tab" data-view="calendar">Kalender</button>
+        <button class="tab" data-view="recipes">Recepten <span class="badge" id="recipeBadge">0</span></button>
+        <button class="tab" data-view="shopping">Boodschappen <span class="badge" id="shopBadge">0</span></button>
+    </nav>
+
+    <!-- THIS WEEK VIEW -->
+    <section class="view active" id="view-week">
+        <div class="calendar-header">
+            <h2>Vooruitblik · 7 dagen</h2>
+        </div>
+        <div class="week-overview" id="weekOverview"></div>
+    </section>
+
+    <!-- CALENDAR VIEW -->
+    <section class="view" id="view-calendar">
+        <div class="calendar-header">
+            <h2>Volledige kalender</h2>
+            <div class="calendar-nav">
+                <button class="cal-btn" id="prevMonth">‹</button>
+                <span class="month-label" id="monthLabel">Mei 2026</span>
+                <button class="cal-btn" id="nextMonth">›</button>
+            </div>
+        </div>
+        <div class="weekdays">
+            <div class="weekday">Maa</div>
+            <div class="weekday">Din</div>
+            <div class="weekday">Woe</div>
+            <div class="weekday">Don</div>
+            <div class="weekday">Vri</div>
+            <div class="weekday">Zat</div>
+            <div class="weekday">Zon</div>
+        </div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+    </section>
+
+    <!-- RECIPES VIEW -->
+    <section class="view" id="view-recipes">
+        <div class="calendar-header">
+            <h2>Alle recepten</h2>
+        </div>
+        <div class="recipe-filter" id="recipeFilter"></div>
+        <div class="recipes-grid" id="recipesGrid"></div>
+    </section>
+
+    <!-- SHOPPING VIEW -->
+    <section class="view" id="view-shopping">
+        <div class="shopping-controls">
+            <h2>Boodschappenlijst</h2>
+            <div class="shopping-progress" id="shoppingProgress">
+                <strong>0</strong> van 0 gevonkt
+            </div>
+            <div class="shopping-actions">
+                <button class="action-btn" id="resetShop">Reset</button>
+                <button class="action-btn primary" id="printShop">Afdrukken</button>
+            </div>
+        </div>
+        <div class="shopping-grid" id="shoppingGrid"></div>
+    </section>
+
+    <!-- TIPS -->
+    <section class="tips-section">
+        <h2>Tips uit de keuken</h2>
+        <div class="tips-grid">
+            <div class="tip">
+                <div class="tip-title">Bulk koken</div>
+                <div class="tip-body">Chili, bolognese, parmigiana, cannelloni en soep zijn berekend om ook als lunch van de volgende dag te dienen. Restjes-dagen zijn al in het plan opgenomen.</div>
+            </div>
+            <div class="tip">
+                <div class="tip-title">Diepvriesbessen</div>
+                <div class="tip-body">Goedkoper en even voedzaam als verse bessen voor smoothiebowls en overnight oats. Houd altijd een zak in de vriezer.</div>
+            </div>
+            <div class="tip">
+                <div class="tip-title">Hummus zelf maken</div>
+                <div class="tip-body">Mix wekelijks een blik kikkererwten met tahin, citroen, knoflook, olijfolie en een scheutje water. Stukken beter dan kant-en-klaar.</div>
+            </div>
+            <div class="tip">
+                <div class="tip-title">Halloumi vervangen</div>
+                <div class="tip-body">Niet te vinden? Vervang door paneer of blokjes feta voor de ovenschotel. Dezelfde stevige textuur, andere smaak.</div>
+            </div>
+            <div class="tip">
+                <div class="tip-title">Bonenbolognese trucs</div>
+                <div class="tip-body">Geef de saus minstens 20 minuten — hoe langer hij suddert, hoe rijker en "vleziger". Een klontje boter op het einde maakt 'm extra rond.</div>
+            </div>
+            <div class="tip">
+                <div class="tip-title">Klaarmaken vooraf</div>
+                <div class="tip-body">Overnight oats maak je 's avonds — 1 minuut werk. Soep en chili kunnen 3 dagen in de koelkast, perfect om op zondag voor te bereiden.</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="ornament">❦</div>
+        <div>Maaltijdplan · Mei – Juni 2026 · Smakelijk</div>
+    </footer>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+        <button class="modal-close" id="modalClose">×</button>
+        <div id="modalContent"></div>
+    </div>
+</div>
+
+<script>
+/* ============================
+   DATA
+   ============================ */
+
+const RECIPES = {
+    // ONTBIJT
+    oats: {
+        name: "Overnight oats met banaan",
+        category: "Ontbijt",
+        time: "5 min",
+        serves: "2 personen",
+        prep: "De avond ervoor",
+        ingredients: [
+            "100 g havervlokken",
+            "300 ml melk (of plantaardige melk)",
+            "2 el Griekse yoghurt",
+            "1 el honing of ahornsiroop",
+            "1 banaan, in plakjes",
+            "Snufje kaneel"
+        ],
+        method: [
+            "Meng haver, melk, yoghurt, honing en kaneel in twee weckpotten.",
+            "Laat een nacht in de koelkast staan.",
+            "Beleg 's ochtends met plakjes banaan."
+        ]
+    },
+    yogurt: {
+        name: "Griekse yoghurt met bessen & granola",
+        category: "Ontbijt",
+        time: "3 min",
+        serves: "2 personen",
+        ingredients: ["400 g Griekse yoghurt", "150 g gemengde bessen", "60 g granola", "1 el honing"],
+        method: ["Laag yoghurt, bessen en granola in kommen.", "Besprenkel met honing."]
+    },
+    tomatoToast: {
+        name: "Tomaat-mozzarella toast met ei",
+        category: "Ontbijt",
+        time: "10 min",
+        serves: "2 personen",
+        ingredients: [
+            "4 sneden zuurdesembrood",
+            "1 bol mozzarella, in plakjes",
+            "2 trostomaten, in plakjes",
+            "4 eieren",
+            "Verse basilicum, olijfolie, zout, peper, scheutje azijn"
+        ],
+        method: [
+            "Rooster het zuurdesem.",
+            "Bak of pocheer de eieren (voor pocheren: water zachtjes laten koken met een scheutje azijn, eieren erin laten glijden, 3 min).",
+            "Beleg de toast met plakjes mozzarella en tomaat, leg het ei erop.",
+            "Werk af met basilicum, olijfolie, zout en peper."
+        ]
+    },
+    omelette: {
+        name: "Omelet met spinazie & feta",
+        category: "Ontbijt",
+        time: "10 min",
+        serves: "2 personen",
+        ingredients: ["4 eieren", "Grote handvol spinazie", "60 g feta, verkruimeld", "Boter, zout, peper"],
+        method: [
+            "Klop de eieren met zout en peper.",
+            "Smelt boter in een pan, laat de spinazie kort slinken.",
+            "Giet de eieren erbij. Wanneer bijna gestold, strooi de feta erover, vouw dicht en serveer."
+        ]
+    },
+    smoothie: {
+        name: "Smoothiebowl",
+        category: "Ontbijt",
+        time: "5 min",
+        serves: "2 personen",
+        ingredients: [
+            "2 ingevroren bananen",
+            "200 g diepgevroren bessen",
+            "200 ml melk of yoghurt",
+            "Topping: granola, verse bessen, plakjes banaan, honing"
+        ],
+        method: [
+            "Mix het diepgevroren fruit met melk tot een dikke smoothie.",
+            "Schep in kommen en beleg met de toppings."
+        ]
+    },
+    pancakes: {
+        name: "Pannenkoeken met bessen & yoghurt",
+        category: "Ontbijt",
+        time: "20 min",
+        serves: "2 personen",
+        ingredients: [
+            "150 g bloem",
+            "1 tl bakpoeder",
+            "1 el suiker",
+            "1 ei",
+            "250 ml melk",
+            "Boter om te bakken",
+            "Erbij: Griekse yoghurt, bessen, honing"
+        ],
+        method: [
+            "Klop bloem, bakpoeder, suiker, ei en melk tot een glad beslag.",
+            "Bak telkens een soeplepel in een beboterde pan tot er belletjes verschijnen.",
+            "Draai om en bak nog 1 minuut.",
+            "Serveer met yoghurt, bessen en honing."
+        ]
+    },
+    scrambledEggs: {
+        name: "Roerei op toast",
+        category: "Ontbijt",
+        time: "8 min",
+        serves: "2 personen",
+        ingredients: ["4 eieren", "Scheutje melk", "Klontje boter", "4 sneden zuurdesembrood", "Zout, peper, eventueel bieslook"],
+        method: [
+            "Klop de eieren los met melk, zout en peper.",
+            "Bak op laag vuur in boter, roer voortdurend, tot net gestold.",
+            "Serveer op toast."
+        ]
+    },
+    shakshuka: {
+        name: "Shakshuka",
+        category: "Ontbijt",
+        time: "25 min",
+        serves: "2 personen",
+        ingredients: [
+            "1 ui, in plakjes",
+            "1 rode paprika, in reepjes",
+            "2 teentjes knoflook",
+            "1 blik gepelde tomaten",
+            "1 tl komijn, 1 tl gerookte paprika",
+            "4 eieren",
+            "Feta erbij",
+            "Olijfolie, zout, peper, peterselie"
+        ],
+        method: [
+            "Bak de ui en paprika zacht in olijfolie (8 min). Voeg knoflook, komijn en paprikapoeder toe.",
+            "Giet de tomaten erbij, kruid, en laat 10 minuten sudderen.",
+            "Maak 4 kuiltjes, breek de eieren erin, dek af, en gaar 5–7 min tot het wit gestold is.",
+            "Werk af met verkruimelde feta en peterselie."
+        ]
+    },
+
+    // LUNCH
+    capreseSalad: {
+        name: "Caprese pastasalade",
+        category: "Lunch",
+        time: "15 min",
+        serves: "2 personen",
+        ingredients: [
+            "200 g pasta (penne of fusilli)",
+            "1 bol mozzarella, in blokjes",
+            "Handvol kerstomaten, gehalveerd",
+            "Verse basilicum, in reepjes",
+            "Dressing: olijfolie, balsamicoazijn, knoflook, zout, peper"
+        ],
+        method: [
+            "Kook de pasta beetgaar, spoel koud.",
+            "Meng met mozzarella, tomaat en basilicum.",
+            "Hussel met de dressing."
+        ]
+    },
+    tomatoSoup: {
+        name: "Tomaten-paprikasoep",
+        category: "Lunch",
+        time: "30 min",
+        serves: "4 personen (2 dagen lunch)",
+        ingredients: [
+            "1 ui, 1 wortel, 1 stengel selderij, gesneden",
+            "2 teentjes knoflook",
+            "1 pot geroosterde paprika (~300 g), uitgelekt",
+            "2 blikken gepelde tomaten",
+            "1 tl gerookte paprika, 1 tl komijn",
+            "800 ml groentebouillon",
+            "Scheut room of kokosmelk (optioneel)",
+            "Olijfolie, zout, peper, basilicum"
+        ],
+        method: [
+            "Bak ui, wortel en selderij zacht in olie (8 min).",
+            "Voeg knoflook en specerijen toe.",
+            "Doe geroosterde paprika, tomaten en bouillon erbij. Laat 15 min sudderen.",
+            "Mix glad. Werk af met een scheut room en basilicum."
+        ]
+    },
+    hummusWrap: {
+        name: "Wrap met hummus & groenten",
+        category: "Lunch",
+        time: "5 min",
+        serves: "2 personen",
+        ingredients: ["2 wraps", "Hummus", "Geraspte wortel", "Komkommerreepjes", "Spinazie", "Paprika in plakjes", "Scheutje citroensap"],
+        method: ["Bestrijk 2 wraps royaal met hummus.", "Beleg met de groenten en een scheutje citroensap.", "Rol stevig op."]
+    },
+    capreseToast: {
+        name: "Caprese-salade met zuurdesem",
+        category: "Lunch",
+        time: "5 min",
+        serves: "2 personen",
+        ingredients: ["Tomaat in plakjes", "Verse mozzarella", "Basilicum", "Olijfolie, balsamico, zout, peper", "Zuurdesembrood, geroosterd"],
+        method: ["Schik tomaat, mozzarella en basilicum.", "Besprenkel met olijfolie en balsamico, kruid.", "Serveer met geroosterd zuurdesembrood."]
+    },
+    buddhaBowl: {
+        name: "Quinoa Buddha bowl",
+        category: "Lunch",
+        time: "25 min",
+        serves: "2 personen",
+        ingredients: [
+            "150 g quinoa",
+            "1 zoete aardappel, in blokjes",
+            "1 blik kikkererwten",
+            "Spinazie, komkommer, geraspte wortel, kerstomaten",
+            "2 flinke el hummus",
+            "Dressing: tahin, citroen, knoflook, water"
+        ],
+        method: [
+            "Rooster de zoete aardappel en kikkererwten met olijfolie, komijn en paprikapoeder op 200 °C gedurende 25 min.",
+            "Kook de quinoa.",
+            "Schep alles in kommen met de rauwe groenten, een schep hummus erbij.",
+            "Besprenkel met tahindressing."
+        ]
+    },
+    greekSalad: {
+        name: "Griekse salade met feta",
+        category: "Lunch",
+        time: "10 min",
+        serves: "2 personen",
+        ingredients: ["Komkommer", "Tomaat", "Rode ui", "Paprika", "Kalamata-olijven (indien voorhanden)", "Feta in blokjes", "Olijfolie, oregano, zout, peper"],
+        method: ["Snijd alle groenten in stukken.", "Meng met feta.", "Breng op smaak met olijfolie, oregano, zout en peper."]
+    },
+
+    // AVONDETEN
+    chili: {
+        name: "Veggie chili met zilvervliesrijst",
+        category: "Avondeten",
+        time: "40 min",
+        serves: "4 personen (avondeten + 1 lunch)",
+        ingredients: [
+            "1 ui, 1 paprika, 2 teentjes knoflook",
+            "1 blik kidneybonen, 1 blik zwarte bonen, 1 blik gepelde tomaten",
+            "2 el tomatenpuree",
+            "1 tl komijn, 1 tl gerookte paprika, 1 tl oregano, chilivlokken naar smaak",
+            "300 g zilvervliesrijst",
+            "Olijfolie, zout"
+        ],
+        method: [
+            "Bak de ui en paprika zacht in olie.",
+            "Voeg knoflook en kruiden toe.",
+            "Doe de bonen, tomaten, puree en 200 ml water erbij. Laat 25 min sudderen.",
+            "Serveer op gekookte zilvervliesrijst."
+        ]
+    },
+    courgetteRisotto: {
+        name: "Risotto met courgette & spinazie",
+        category: "Avondeten",
+        time: "35 min",
+        serves: "2-3 personen",
+        ingredients: [
+            "250 g arboriorijst",
+            "2 courgettes, in blokjes",
+            "1 ui, 2 teentjes knoflook",
+            "100 ml witte wijn (optioneel)",
+            "1 L hete groentebouillon",
+            "Grote handvol spinazie",
+            "40 g parmezaan, boter, citroenschil"
+        ],
+        method: [
+            "Bak de ui zacht in boter.",
+            "Voeg de courgette toe en bak 5 min tot lichtgoud.",
+            "Doe de knoflook erbij, dan de rijst, 1 min roeren. Eventueel wijn toevoegen.",
+            "Schep telkens een soeplepel bouillon erbij, blijf roeren, tot de rijst romig is (~20 min).",
+            "Roer er spinazie, parmezaan, citroenrasp en een klontje boter door."
+        ]
+    },
+    pumpkinRisotto: {
+        name: "Risotto met pompoen & salie",
+        category: "Avondeten",
+        time: "40 min",
+        serves: "2-3 personen",
+        ingredients: [
+            "250 g arboriorijst",
+            "400 g pompoen (butternut), in kleine blokjes",
+            "1 ui, 2 teentjes knoflook",
+            "1 L hete groentebouillon",
+            "8 verse salieblaadjes (of 1 tl gedroogd)",
+            "50 g parmezaan, boter",
+            "Olijfolie, zout, peper, snufje nootmuskaat"
+        ],
+        method: [
+            "Rooster de pompoen 20 min op 200 °C met olie, zout en peper.",
+            "Bak intussen de ui zacht in boter, voeg knoflook en rijst toe, 1 min roeren.",
+            "Voeg bouillon lepel per lepel toe, roer constant (~20 min).",
+            "Roer in de laatste 5 min de pompoen, salie, parmezaan en een klontje boter erdoor.",
+            "Eventueel nog wat nootmuskaat."
+        ]
+    },
+    halloumiBake: {
+        name: "Ovenschotel met halloumi & geroosterde groenten",
+        category: "Avondeten",
+        time: "35 min",
+        serves: "2 personen",
+        ingredients: [
+            "1 courgette, 1 paprika, 1 rode ui, 1 zoete aardappel — in stukken",
+            "1 blok halloumi, in plakjes",
+            "Olijfolie, oregano, zout, peper, citroen"
+        ],
+        method: [
+            "Meng de groenten met olie en kruiden, rooster 20 min op 200 °C.",
+            "Leg de halloumi-plakjes erop en rooster nog 10 min.",
+            "Knijp er citroen over."
+        ]
+    },
+    cannelloni: {
+        name: "Cannelloni met spinazie & ricotta",
+        category: "Avondeten",
+        time: "50 min",
+        serves: "4 personen (avondeten + 1 lunch)",
+        ingredients: [
+            "12 cannelloni",
+            "400 g spinazie, geslonken en uitgeknepen",
+            "500 g ricotta",
+            "1 ei",
+            "50 g parmezaan",
+            "Nootmuskaat, zout, peper",
+            "2 blikken gepelde tomaten + 1 teentje knoflook + olijfolie (voor de saus)",
+            "100 g geraspte mozzarella"
+        ],
+        method: [
+            "Meng spinazie, ricotta, ei, parmezaan en nootmuskaat.",
+            "Spuit in de cannelloni.",
+            "Maak een snelle tomatensaus.",
+            "Verdeel saus over de bodem van een ovenschotel, leg de cannelloni erop, nog saus, dan mozzarella.",
+            "Bak 30 min op 200 °C."
+        ]
+    },
+    tacos: {
+        name: "Taco's met zoete aardappel & zwarte bonen",
+        category: "Avondeten",
+        time: "30 min",
+        serves: "2 personen",
+        ingredients: [
+            "1 grote zoete aardappel, in blokjes",
+            "1 blik zwarte bonen",
+            "1 tl komijn, 1 tl gerookte paprika",
+            "6 kleine tortilla's",
+            "Limoen, koriander, rode ui, yoghurt, geraspte kaas",
+            "Optioneel: salsa van tomaat & rode ui"
+        ],
+        method: [
+            "Rooster de zoete aardappel met kruiden 25 min op 200 °C.",
+            "Verwarm de zwarte bonen.",
+            "Vul de tortilla's met zoete aardappel, bonen, rode ui, koriander, een lepel yoghurt en geraspte kaas.",
+            "Knijp er limoen over."
+        ]
+    },
+    beanBolognese: {
+        name: "Bonenbolognese met pasta",
+        category: "Avondeten",
+        time: "35 min",
+        serves: "4 personen (avondeten + 1 lunch)",
+        ingredients: [
+            "1 ui, 2 wortelen, 1 stengel selderij, fijngesneden",
+            "2 teentjes knoflook",
+            "1 blik zwarte bonen, geprakt (niet helemaal glad)",
+            "1 blik cannellinibonen of witte bonen, geprakt",
+            "50 g walnoten, fijngehakt",
+            "1 blik gepelde tomaten",
+            "2 el tomatenpuree",
+            "1 tl oregano, Italiaanse kruiden, snufje kaneel",
+            "1 el sojasaus (voor diepte/umami)",
+            "400 g pasta",
+            "Parmezaan erbij"
+        ],
+        method: [
+            "Bak ui, wortel en selderij zacht (10 min).",
+            "Voeg knoflook, kruiden, geprakte bonen, walnoten, tomaten, puree, sojasaus en 300 ml water toe.",
+            "Laat 20 min sudderen tot dik en romig.",
+            "Schep door de gekookte pasta. Werk af met parmezaan."
+        ],
+        note: "De gehakte walnoten en geprakte bonen geven de saus dezelfde stevigheid en bite als gehakt — verrassend dicht bij echte bolognese."
+    },
+    thaiCurry: {
+        name: "Thaise rode curry met tofu",
+        category: "Avondeten",
+        time: "25 min",
+        serves: "2 personen",
+        ingredients: [
+            "1 blok stevige tofu, in blokjes",
+            "2 el rode currypasta",
+            "1 blik kokosmelk",
+            "1 paprika, 1 courgette, in plakjes",
+            "Handvol spinazie",
+            "Sojasaus, limoen, jasmijnrijst erbij"
+        ],
+        method: [
+            "Bak de tofu goudbruin. Apart zetten.",
+            "Bak de currypasta 1 min, voeg kokosmelk en groenten toe, sudder 8 min.",
+            "Doe de tofu terug, voeg spinazie toe, een scheutje soja en limoen.",
+            "Serveer met rijst."
+        ]
+    },
+    stirfry: {
+        name: "Roerbak met paprika, broccoli & noedels",
+        category: "Avondeten",
+        time: "15 min",
+        serves: "2 personen",
+        ingredients: [
+            "250 g noedels",
+            "1 paprika, broccoliroosjes (1 stronk), juliennewortel, halve courgette",
+            "2 teentjes knoflook, gember",
+            "Sesamzaad (optioneel)",
+            "Saus: 3 el sojasaus, 1 el honing, scheutje azijn, 1 tl sesamolie indien voorhanden"
+        ],
+        method: [
+            "Kook de noedels.",
+            "Roerbak de groenten in hete olie met knoflook en gember (5 min — broccoli eerst, daarna de rest).",
+            "Voeg de noedels en de saus toe. Goed mengen.",
+            "Eventueel sesamzaad erover."
+        ]
+    },
+    parmigiana: {
+        name: "Aubergine parmigiana",
+        category: "Avondeten",
+        time: "1 u",
+        serves: "4 personen (avondeten + 1 lunch)",
+        ingredients: [
+            "2 grote aubergines, in plakken van 1 cm",
+            "2 blikken gepelde tomaten",
+            "2 teentjes knoflook",
+            "Basilicum, oregano",
+            "250 g mozzarella, 80 g parmezaan",
+            "Olijfolie, zout"
+        ],
+        method: [
+            "Bestrooi de aubergineplakken met zout, laat 20 min staan, dep droog.",
+            "Bestrijk met olie en rooster op 220 °C tot goudbruin (15 min).",
+            "Maak de tomatensaus.",
+            "Stapel laag voor laag: saus, aubergine, mozzarella, parmezaan — herhaal.",
+            "Bak 25 min op 200 °C."
+        ]
+    },
+    pizza: {
+        name: "Pizza margherita (zelfgemaakt)",
+        category: "Avondeten",
+        time: "1 u 30 (grotendeels rijstijd)",
+        serves: "2 personen",
+        ingredients: [
+            "Deeg: 300 g bloem, 1 tl zout, 1 tl gedroogde gist, 200 ml lauw water, 1 el olijfolie",
+            "Tomatenpassata of gepureerde gepelde tomaten",
+            "Verse mozzarella",
+            "Basilicum, olijfolie, zout"
+        ],
+        method: [
+            "Meng het deeg, kneed 8 min. Laat 1 u rijzen.",
+            "Verdeel in 2, rol dun uit.",
+            "Beleg met saus en stukjes mozzarella.",
+            "Bak op de hoogste oventemperatuur (240–260 °C) gedurende 8–10 min op een hete bakplaat.",
+            "Werk na het bakken af met verse basilicum."
+        ]
+    },
+    chickpeaCurry: {
+        name: "Kikkererwtencurry met rijst",
+        category: "Avondeten",
+        time: "25 min",
+        serves: "2-3 personen",
+        ingredients: [
+            "1 ui, 2 teentjes knoflook, duim gember",
+            "2 blikken kikkererwten",
+            "1 blik gepelde tomaten",
+            "1 el currypoeder, 1 tl komijn, 1 tl kurkuma",
+            "1 blik kokosmelk",
+            "Handvol spinazie",
+            "Basmatirijst"
+        ],
+        method: [
+            "Bak de ui zacht, voeg knoflook, gember en specerijen toe.",
+            "Doe kikkererwten, tomaten en kokosmelk erbij.",
+            "Laat 15 min sudderen.",
+            "Roer er spinazie door. Serveer met rijst."
+        ]
+    }
+};
+
+// Meal plan: each day = { breakfast, lunch, dinner, lunchIsLeftover? }
+const MEAL_PLAN = [
+    // Week 1: 20-24 mei
+    { date: "2026-05-20", breakfast: "yogurt", lunch: "capreseSalad", dinner: "chili" },
+    { date: "2026-05-21", breakfast: "oats", lunch: "chili", lunchIsLeftover: true, dinner: "courgetteRisotto" },
+    { date: "2026-05-22", breakfast: "tomatoToast", lunch: "tomatoSoup", dinner: "halloumiBake" },
+    { date: "2026-05-23", breakfast: "omelette", lunch: "capreseToast", dinner: "cannelloni" },
+    { date: "2026-05-24", breakfast: "pancakes", lunch: "cannelloni", lunchIsLeftover: true, dinner: "tacos" },
+    // Week 2: 25-31 mei
+    { date: "2026-05-25", breakfast: "oats", lunch: "hummusWrap", dinner: "beanBolognese" },
+    { date: "2026-05-26", breakfast: "yogurt", lunch: "beanBolognese", lunchIsLeftover: true, dinner: "thaiCurry" },
+    { date: "2026-05-27", breakfast: "tomatoToast", lunch: "buddhaBowl", dinner: "stirfry" },
+    { date: "2026-05-28", breakfast: "smoothie", lunch: "greekSalad", dinner: "parmigiana" },
+    { date: "2026-05-29", breakfast: "scrambledEggs", lunch: "parmigiana", lunchIsLeftover: true, dinner: "pizza" },
+    { date: "2026-05-30", breakfast: "shakshuka", lunch: "capreseToast", dinner: "pumpkinRisotto" },
+    { date: "2026-05-31", breakfast: "pancakes", lunch: "pumpkinRisotto", lunchIsLeftover: true, dinner: "chickpeaCurry" },
+    // Week 3: 1-7 juni
+    { date: "2026-06-01", breakfast: "oats", lunch: "chickpeaCurry", lunchIsLeftover: true, dinner: "chili" },
+    { date: "2026-06-02", breakfast: "yogurt", lunch: "tomatoSoup", dinner: "halloumiBake" },
+    { date: "2026-06-03", breakfast: "tomatoToast", lunch: "hummusWrap", dinner: "cannelloni" },
+    { date: "2026-06-04", breakfast: "smoothie", lunch: "cannelloni", lunchIsLeftover: true, dinner: "tacos" },
+    { date: "2026-06-05", breakfast: "scrambledEggs", lunch: "buddhaBowl", dinner: "beanBolognese" },
+    { date: "2026-06-06", breakfast: "shakshuka", lunch: "greekSalad", dinner: "thaiCurry" },
+    { date: "2026-06-07", breakfast: "pancakes", lunch: "capreseToast", dinner: "courgetteRisotto" },
+    // Week 4: 8-14 juni
+    { date: "2026-06-08", breakfast: "oats", lunch: "courgetteRisotto", lunchIsLeftover: true, dinner: "stirfry" },
+    { date: "2026-06-09", breakfast: "yogurt", lunch: "capreseSalad", dinner: "parmigiana" },
+    { date: "2026-06-10", breakfast: "tomatoToast", lunch: "parmigiana", lunchIsLeftover: true, dinner: "pizza" },
+    { date: "2026-06-11", breakfast: "smoothie", lunch: "tomatoSoup", dinner: "chickpeaCurry" },
+    { date: "2026-06-12", breakfast: "scrambledEggs", lunch: "chickpeaCurry", lunchIsLeftover: true, dinner: "halloumiBake" },
+    { date: "2026-06-13", breakfast: "shakshuka", lunch: "hummusWrap", dinner: "tacos" },
+    { date: "2026-06-14", breakfast: "pancakes", lunch: "greekSalad", dinner: "cannelloni" },
+    // Week 5: 15-18 juni
+    { date: "2026-06-15", breakfast: "oats", lunch: "cannelloni", lunchIsLeftover: true, dinner: "beanBolognese" },
+    { date: "2026-06-16", breakfast: "yogurt", lunch: "buddhaBowl", dinner: "thaiCurry" },
+    { date: "2026-06-17", breakfast: "tomatoToast", lunch: "capreseToast", dinner: "chili" },
+    { date: "2026-06-18", breakfast: "shakshuka", lunch: "chili", lunchIsLeftover: true, dinner: "pumpkinRisotto" }
+];
+
+const SHOPPING = {
+    "Voorraadkast": [
+        "Olijfolie (1 L)", "Zonnebloem- of raapzaadolie", "Balsamicoazijn", "Sojasaus",
+        "Thaise rode currypasta", "Tomatenpuree", "Gepelde tomaten (12 blikken)",
+        "Geroosterde paprika in pot (2 potten)", "Kikkererwten (6 blikken)",
+        "Zwarte bonen (8 blikken)", "Kidneybonen (4 blikken)", "Cannellinibonen (2 blikken)",
+        "Kokosmelk (3 blikken)", "Zilvervliesrijst (1 kg)", "Basmati of jasmijnrijst (1 kg)",
+        "Arborio / risottorijst (500 g)", "Quinoa (500 g)", "Havervlokken (1 kg)",
+        "Pasta — spaghetti (500 g)", "Pasta — penne of fusilli (500 g)", "Cannelloni (1 doos)",
+        "Eier- of rijstnoedels (250 g)", "Wraps / tortilla's (grote verpakking)",
+        "Pizzabloem '00' (1 kg)", "Gedroogde gist", "Granola (1 zak)",
+        "Walnoten (100 g)", "Honing of ahornsiroop", "Bouillonblokjes (groente)",
+        "Bloem (1 kg)", "Bakpoeder", "Tahin (1 pot)"
+    ],
+    "Specerijen & Kruiden": [
+        "Komijn", "Gerookte paprika", "Zoete paprika", "Chilivlokken",
+        "Gemalen koriander", "Kurkuma", "Currypoeder", "Oregano",
+        "Italiaanse kruiden", "Kaneel", "Gedroogde salie",
+        "Knoflook- en uienpoeder", "Zout & zwarte peper", "Nootmuskaat"
+    ],
+    "Groenten (vers, wekelijks)": [
+        "Uien geel (~5/week)", "Rode uien (2/week)", "Knoflook (2 bollen)",
+        "Wortelen (~6/week)", "Selderij (1 struik)", "Paprika's (6/week)",
+        "Kerstomaten (2 bakjes)", "Trostomaten (~8)", "Spinazie (2 grote zakken)",
+        "Sla of rucola", "Komkommer (2)", "Courgette (3)", "Aubergine (2)",
+        "Zoete aardappel (2 grote)", "Broccoli (2 stronken)", "Pompoen butternut (1)",
+        "Citroen (3)", "Limoen (2)", "Gember (klein stukje)", "Rode chilipeper (2)"
+    ],
+    "Verse kruiden & Fruit": [
+        "Verse basilicum", "Verse peterselie", "Verse koriander", "Verse salie (indien beschikbaar)",
+        "Bananen (~7)", "Diepvries bessen (500 g)", "Vers bessen (1 bakje)", "Appels (4)"
+    ],
+    "Zuivel & Eieren": [
+        "Eieren (2 × 10)", "Griekse yoghurt (1 grote pot)", "Melk (1-2 L)",
+        "Boter (250 g)", "Feta (200 g)", "Halloumi (2 × 225 g)",
+        "Mozzarella (4 verse bollen + 1 blok)", "Ricotta (500 g)",
+        "Parmezaan/Grana Padano (200 g)", "Cheddar (optioneel)"
+    ],
+    "Plantaardig & Extra": [
+        "Stevige tofu (2 × 400 g)", "Hummus (1 pot of zelfgemaakt)",
+        "Zuurdesem of rustiek brood (wekelijks vers)"
+    ]
+};
+
+const MEAL_ICONS = { breakfast: "🥣", lunch: "🥗", dinner: "🍽" };
+const DAY_NAMES_NL = ["Zondag", "Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag"];
+const DAY_SHORT_NL = ["Zon", "Maa", "Din", "Woe", "Don", "Vri", "Zat"];
+const MONTH_NAMES_NL = ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"];
+
+/* ============================
+   STATE
+   ============================ */
+
+const STORAGE_KEY = "mealplan_v1";
+
+function loadState() {
+    try {
+        const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+        return { checked: new Set(stored.checked || []) };
+    } catch (e) {
+        return { checked: new Set() };
+    }
+}
+
+function saveState() {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+            checked: Array.from(state.checked)
+        }));
+    } catch (e) {}
+}
+
+const state = loadState();
+let currentMonth = 4; // May 2026 (0-indexed)
+let currentYear = 2026;
+
+/* ============================
+   HELPERS
+   ============================ */
+
+function formatDate(dateStr) {
+    const [y, m, d] = dateStr.split("-").map(Number);
+    return new Date(y, m - 1, d);
+}
+
+function dateToStr(date) {
+    return date.toISOString().split("T")[0];
+}
+
+function getMealForDate(dateStr) {
+    return MEAL_PLAN.find(d => d.date === dateStr);
+}
+
+function today() {
+    return new Date();
+}
+
+function isToday(dateStr) {
+    const d = formatDate(dateStr);
+    const t = today();
+    return d.getDate() === t.getDate() &&
+           d.getMonth() === t.getMonth() &&
+           d.getFullYear() === t.getFullYear();
+}
+
+/* ============================
+   RENDERING
+   ============================ */
+
+function renderTodayLabel() {
+    const t = today();
+    const label = `${DAY_NAMES_NL[t.getDay()]} ${t.getDate()} ${MONTH_NAMES_NL[t.getMonth()].toLowerCase()} ${t.getFullYear()}`;
+    document.getElementById("todayLabel").textContent = label;
+}
+
+function renderCalendar() {
+    const grid = document.getElementById("calendarGrid");
+    const monthLabel = document.getElementById("monthLabel");
+    monthLabel.textContent = `${MONTH_NAMES_NL[currentMonth]} ${currentYear}`;
+
+    grid.innerHTML = "";
+
+    const firstDay = new Date(currentYear, currentMonth, 1);
+    const lastDay = new Date(currentYear, currentMonth + 1, 0);
+    // Monday-first: convert Sun=0 to 6, Mon=1 to 0, etc.
+    let startOffset = firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1;
+
+    for (let i = 0; i < startOffset; i++) {
+        const empty = document.createElement("div");
+        empty.className = "day empty";
+        grid.appendChild(empty);
+    }
+
+    for (let d = 1; d <= lastDay.getDate(); d++) {
+        const date = new Date(currentYear, currentMonth, d);
+        const dateStr = dateToStr(date);
+        const meal = getMealForDate(dateStr);
+
+        const dayEl = document.createElement("div");
+        dayEl.className = "day";
+        if (isToday(dateStr)) dayEl.classList.add("today");
+
+        let mealPreview = "—";
+        let icon = "";
+        if (meal) {
+            const dinner = RECIPES[meal.dinner];
+            mealPreview = dinner.name;
+            icon = MEAL_ICONS.dinner;
+        }
+
+        dayEl.innerHTML = `
+            <div class="day-num">${d}</div>
+            ${icon ? `<div class="meal-icon">${icon}</div>` : ""}
+            <div class="day-meal">${mealPreview}</div>
+        `;
+
+        if (meal) {
+            dayEl.addEventListener("click", () => openDayModal(dateStr));
+        } else {
+            dayEl.style.cursor = "default";
+            dayEl.style.opacity = "0.5";
+        }
+
+        grid.appendChild(dayEl);
+    }
+}
+
+function openDayModal(dateStr) {
+    const meal = getMealForDate(dateStr);
+    if (!meal) return;
+
+    const date = formatDate(dateStr);
+    const dateLabel = `${DAY_NAMES_NL[date.getDay()]} ${date.getDate()} ${MONTH_NAMES_NL[date.getMonth()].toLowerCase()}`;
+
+    const breakfast = RECIPES[meal.breakfast];
+    const lunch = RECIPES[meal.lunch];
+    const dinner = RECIPES[meal.dinner];
+
+    const html = `
+        <div class="modal-header">
+            <div class="modal-date">${dateLabel}</div>
+            <div class="modal-title">Maaltijden van vandaag</div>
+        </div>
+        <div class="modal-body">
+            <div class="meal-section">
+                <div class="meal-label">🥣 Ontbijt</div>
+                <div class="meal-name">${breakfast.name}</div>
+                ${renderRecipeDetail(breakfast)}
+            </div>
+            <div class="meal-section">
+                <div class="meal-label">🥗 Lunch</div>
+                ${meal.lunchIsLeftover ? '<div class="leftover-tag">Restjes van gisteren</div>' : ''}
+                <div class="meal-name">${lunch.name}</div>
+                ${meal.lunchIsLeftover ? '<div class="recipe-note">Restjes van het avondeten van gisteren. Opwarmen en serveren — meestal nog lekkerder de tweede dag.</div>' : renderRecipeDetail(lunch)}
+            </div>
+            <div class="meal-section">
+                <div class="meal-label">🍽 Avondeten</div>
+                <div class="meal-name">${dinner.name}</div>
+                ${renderRecipeDetail(dinner)}
+            </div>
+        </div>
+    `;
+    document.getElementById("modalContent").innerHTML = html;
+    document.getElementById("modalOverlay").classList.add("active");
+}
+
+function renderRecipeDetail(recipe) {
+    return `
+        <div class="recipe-meta">
+            <span>⏱ ${recipe.time}</span>
+            <span>👥 ${recipe.serves}</span>
+        </div>
+        <div class="recipe-section-title">Ingrediënten</div>
+        <ul class="recipe-ingredients">
+            ${recipe.ingredients.map(i => `<li>${i}</li>`).join("")}
+        </ul>
+        <div class="recipe-section-title">Bereiding</div>
+        <ol class="recipe-method">
+            ${recipe.method.map(s => `<li>${s}</li>`).join("")}
+        </ol>
+        ${recipe.note ? `<div class="recipe-note">💡 ${recipe.note}</div>` : ""}
+    `;
+}
+
+function openRecipeModal(key) {
+    const recipe = RECIPES[key];
+    if (!recipe) return;
+    const html = `
+        <div class="modal-header">
+            <div class="modal-date">${recipe.category}</div>
+            <div class="modal-title">${recipe.name}</div>
+        </div>
+        <div class="modal-body">
+            ${renderRecipeDetail(recipe)}
+        </div>
+    `;
+    document.getElementById("modalContent").innerHTML = html;
+    document.getElementById("modalOverlay").classList.add("active");
+}
+
+function renderWeekView() {
+    const overview = document.getElementById("weekOverview");
+    overview.innerHTML = "";
+
+    const t = today();
+    let startDate = new Date(t);
+
+    // If today is before plan start, show plan start
+    const planStart = formatDate("2026-05-20");
+    const planEnd = formatDate("2026-06-18");
+    if (t < planStart) startDate = planStart;
+    if (t > planEnd) startDate = new Date(planEnd.getTime() - 6 * 86400000);
+
+    for (let i = 0; i < 7; i++) {
+        const d = new Date(startDate);
+        d.setDate(startDate.getDate() + i);
+        const dateStr = dateToStr(d);
+        const meal = getMealForDate(dateStr);
+
+        const card = document.createElement("div");
+        card.className = "week-card";
+        if (isToday(dateStr)) card.classList.add("today");
+
+        const dayName = DAY_NAMES_NL[d.getDay()];
+        const dateLabel = `${d.getDate()} ${MONTH_NAMES_NL[d.getMonth()].toLowerCase()}`;
+
+        if (meal) {
+            const b = RECIPES[meal.breakfast];
+            const l = RECIPES[meal.lunch];
+            const di = RECIPES[meal.dinner];
+            card.innerHTML = `
+                <div class="week-card-day">${dayName}</div>
+                <div class="week-card-date">${dateLabel}</div>
+                <div class="week-card-meals">
+                    <div><strong>Ontbijt</strong>${b.name}</div>
+                    <div><strong>Lunch ${meal.lunchIsLeftover ? '(restjes)' : ''}</strong>${l.name}</div>
+                    <div><strong>Avondeten</strong>${di.name}</div>
+                </div>
+            `;
+            card.addEventListener("click", () => openDayModal(dateStr));
+        } else {
+            card.innerHTML = `
+                <div class="week-card-day">${dayName}</div>
+                <div class="week-card-date">${dateLabel}</div>
+                <div class="week-card-meals"><div style="opacity:0.5">Geen maaltijden gepland</div></div>
+            `;
+            card.style.cursor = "default";
+        }
+
+        overview.appendChild(card);
+    }
+}
+
+let currentRecipeFilter = "Alle";
+
+function renderRecipes() {
+    const filterContainer = document.getElementById("recipeFilter");
+    const grid = document.getElementById("recipesGrid");
+
+    const categories = ["Alle", "Ontbijt", "Lunch", "Avondeten"];
+    filterContainer.innerHTML = categories.map(c =>
+        `<button class="filter-btn ${c === currentRecipeFilter ? 'active' : ''}" data-cat="${c}">${c}</button>`
+    ).join("");
+
+    filterContainer.querySelectorAll(".filter-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            currentRecipeFilter = btn.dataset.cat;
+            renderRecipes();
+        });
+    });
+
+    const recipes = Object.entries(RECIPES).filter(([k, r]) =>
+        currentRecipeFilter === "Alle" || r.category === currentRecipeFilter
+    );
+
+    grid.innerHTML = recipes.map(([key, r]) => `
+        <div class="recipe-card" data-key="${key}">
+            <div class="recipe-card-cat">${r.category}</div>
+            <div class="recipe-card-name">${r.name}</div>
+            <div class="recipe-card-meta">⏱ ${r.time} · 👥 ${r.serves}</div>
+        </div>
+    `).join("");
+
+    grid.querySelectorAll(".recipe-card").forEach(card => {
+        card.addEventListener("click", () => openRecipeModal(card.dataset.key));
+    });
+
+    document.getElementById("recipeBadge").textContent = Object.keys(RECIPES).length;
+}
+
+function renderShopping() {
+    const grid = document.getElementById("shoppingGrid");
+    grid.innerHTML = "";
+
+    let totalItems = 0;
+    let checkedCount = 0;
+
+    Object.entries(SHOPPING).forEach(([category, items]) => {
+        const checkedInCat = items.filter(i => state.checked.has(`${category}::${i}`)).length;
+        totalItems += items.length;
+        checkedCount += checkedInCat;
+
+        const cat = document.createElement("div");
+        cat.className = "shopping-category";
+        cat.innerHTML = `
+            <div class="category-header">
+                <div class="category-title">${category}</div>
+                <div class="category-count">${checkedInCat}/${items.length}</div>
+            </div>
+            <ul class="shop-list">
+                ${items.map(i => {
+                    const key = `${category}::${i}`;
+                    const checked = state.checked.has(key);
+                    return `
+                        <li class="shop-item ${checked ? 'checked' : ''}" data-key="${key}">
+                            <div class="shop-checkbox"></div>
+                            <div class="shop-label">${i}</div>
+                        </li>
+                    `;
+                }).join("")}
+            </ul>
+        `;
+        grid.appendChild(cat);
+    });
+
+    grid.querySelectorAll(".shop-item").forEach(item => {
+        item.addEventListener("click", () => {
+            const key = item.dataset.key;
+            if (state.checked.has(key)) state.checked.delete(key);
+            else state.checked.add(key);
+            saveState();
+            renderShopping();
+        });
+    });
+
+    document.getElementById("shoppingProgress").innerHTML =
+        `<strong>${checkedCount}</strong> van ${totalItems} gevonkt`;
+    document.getElementById("shopBadge").textContent = totalItems - checkedCount;
+}
+
+/* ============================
+   EVENTS
+   ============================ */
+
+document.querySelectorAll(".tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+        document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+        tab.classList.add("active");
+        document.getElementById(`view-${tab.dataset.view}`).classList.add("active");
+    });
+});
+
+document.getElementById("prevMonth").addEventListener("click", () => {
+    currentMonth--;
+    if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+    renderCalendar();
+});
+
+document.getElementById("nextMonth").addEventListener("click", () => {
+    currentMonth++;
+    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+    renderCalendar();
+});
+
+document.getElementById("modalClose").addEventListener("click", closeModal);
+document.getElementById("modalOverlay").addEventListener("click", (e) => {
+    if (e.target.id === "modalOverlay") closeModal();
+});
+
+function closeModal() {
+    document.getElementById("modalOverlay").classList.remove("active");
+}
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+});
+
+document.getElementById("resetShop").addEventListener("click", () => {
+    if (confirm("Alle vinkjes wissen?")) {
+        state.checked.clear();
+        saveState();
+        renderShopping();
+    }
+});
+
+document.getElementById("printShop").addEventListener("click", () => {
+    window.print();
+});
+
+/* ============================
+   INIT
+   ============================ */
+
+renderTodayLabel();
+renderWeekView();
+renderCalendar();
+renderRecipes();
+renderShopping();
+</script>
+
+</body>
+</html>
