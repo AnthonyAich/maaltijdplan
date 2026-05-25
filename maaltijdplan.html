@@ -921,7 +921,8 @@ footer .ornament {
         <button class="tab active" data-view="week">Deze week</button>
         <button class="tab" data-view="calendar">Kalender</button>
         <button class="tab" data-view="recipes">Recepten <span class="badge" id="recipeBadge">0</span></button>
-        <button class="tab" data-view="shopping">Boodschappen <span class="badge" id="shopBadge">0</span></button>
+        <button class="tab" data-view="weekshop">Week-boodschappen</button>
+        <button class="tab" data-view="shopping">Voorraadlijst <span class="badge" id="shopBadge">0</span></button>
     </nav>
 
     <!-- THIS WEEK VIEW -->
@@ -963,6 +964,30 @@ footer .ornament {
         <div class="recipes-grid" id="recipesGrid"></div>
     </section>
 
+    <!-- WEEKLY SHOPPING VIEW -->
+    <section class="view" id="view-weekshop">
+        <div class="calendar-header">
+            <h2>Boodschappen per week</h2>
+            <div class="calendar-nav">
+                <button class="cal-btn" id="prevWeek">‹</button>
+                <span class="month-label" id="weekRangeLabel" style="min-width:260px;">—</span>
+                <button class="cal-btn" id="nextWeek">›</button>
+            </div>
+        </div>
+        <p style="font-family:'Fraunces',serif;font-style:italic;color:var(--ink-soft);margin-bottom:24px;max-width:640px;">
+            Automatisch berekend uit de geplande maaltijden van die 7 dagen — voor 2 personen.
+            Restjes-dagen kosten geen extra ingrediënten. Vinkjes worden per week bewaard.
+        </p>
+        <div class="shopping-controls" style="margin-bottom:24px;">
+            <div class="shopping-progress" id="weekShopProgress"><strong>0</strong> van 0 gevonkt</div>
+            <div class="shopping-actions">
+                <button class="action-btn" id="resetWeekShop">Reset week</button>
+                <button class="action-btn primary" id="printWeekShop">Afdrukken</button>
+            </div>
+        </div>
+        <div class="shopping-grid" id="weekShopGrid"></div>
+    </section>
+
     <!-- SHOPPING VIEW -->
     <section class="view" id="view-shopping">
         <div class="shopping-controls">
@@ -984,7 +1009,7 @@ footer .ornament {
         <div class="tips-grid">
             <div class="tip">
                 <div class="tip-title">Bulk koken</div>
-                <div class="tip-body">Chili, bolognese, parmigiana, spinazie-ricotta pasta en soep zijn berekend om ook als lunch van de volgende dag te dienen. Restjes-dagen zijn al in het plan opgenomen.</div>
+                <div class="tip-body">Chili, bolognese, parmigiana, cannelloni en soep zijn berekend om ook als lunch van de volgende dag te dienen. Restjes-dagen zijn al in het plan opgenomen.</div>
             </div>
             <div class="tip">
                 <div class="tip-title">Diepvriesbessen</div>
@@ -995,8 +1020,8 @@ footer .ornament {
                 <div class="tip-body">Mix wekelijks een blik kikkererwten met tahin, citroen, knoflook, olijfolie en een scheutje water. Stukken beter dan kant-en-klaar.</div>
             </div>
             <div class="tip">
-                <div class="tip-title">Halloumi in de pan</div>
-                <div class="tip-body">Halloumi bak je het lekkerst in een droge pan op hoog vuur — zonder olie, 2–3 min per kant, tot hij mooi goudbruin is. Niet te vinden? Vervang door paneer of blokjes feta.</div>
+                <div class="tip-title">Halloumi vervangen</div>
+                <div class="tip-body">Niet te vinden? Vervang door paneer of blokjes feta voor de ovenschotel. Dezelfde stevige textuur, andere smaak.</div>
             </div>
             <div class="tip">
                 <div class="tip-title">Bonenbolognese trucs</div>
@@ -1233,7 +1258,7 @@ const RECIPES = {
             "Dressing: tahin, citroen, knoflook, water"
         ],
         method: [
-            "Bak de zoete aardappel in de airfryer op 200 °C gedurende 18 min (schud halverwege), voeg de kikkererwten toe in de laatste 8 min. Geen airfryer? Bak de blokjes in een pan met deksel op middelhoog vuur ±20 min tot gaar.",
+            "Rooster de zoete aardappel en kikkererwten met olijfolie, komijn en paprikapoeder op 200 °C gedurende 25 min.",
             "Kook de quinoa.",
             "Schep alles in kommen met de rauwe groenten, een schep hummus erbij.",
             "Besprenkel met tahindressing."
@@ -1306,7 +1331,7 @@ const RECIPES = {
             "Olijfolie, zout, peper, snufje nootmuskaat"
         ],
         method: [
-            "Bak de pompoen in de airfryer op 200 °C gedurende 15 min (schud halverwege). Geen airfryer? Bak de blokjes in een pan in olijfolie op middelhoog vuur ±15 min, roer regelmatig tot goudbruin en gaar.",
+            "Rooster de pompoen 20 min op 200 °C met olie, zout en peper.",
             "Bak intussen de ui zacht in boter, voeg knoflook en rijst toe, 1 min roeren.",
             "Voeg bouillon lepel per lepel toe, roer constant (~20 min).",
             "Roer in de laatste 5 min de pompoen, salie, parmezaan en een klontje boter erdoor.",
@@ -1314,9 +1339,9 @@ const RECIPES = {
         ]
     },
     halloumiBake: {
-        name: "Airfryer halloumi & geroosterde groenten",
+        name: "Ovenschotel met halloumi & geroosterde groenten",
         category: "Avondeten",
-        time: "30 min",
+        time: "35 min",
         serves: "2 personen",
         ingredients: [
             "1 courgette, 1 paprika, 1 rode ui, 1 zoete aardappel — in stukken",
@@ -1324,34 +1349,33 @@ const RECIPES = {
             "Olijfolie, oregano, zout, peper, citroen"
         ],
         method: [
-            "Meng de groenten met olie en kruiden. Bak in de airfryer op 200 °C gedurende 15–18 min, schud halverwege. Geen airfryer? Bak in een grote pan op hoog vuur in porties tot goudbruin.",
-            "Bak de halloumi-plakjes in een droge (of licht ingevette) pan op hoog vuur, 2–3 min per kant, tot goudbruin en knapperig.",
-            "Leg de halloumi op de groenten en knijp er citroen over."
+            "Meng de groenten met olie en kruiden, rooster 20 min op 200 °C.",
+            "Leg de halloumi-plakjes erop en rooster nog 10 min.",
+            "Knijp er citroen over."
         ]
     },
     cannelloni: {
-        name: "Pasta met spinazie & ricotta",
+        name: "Cannelloni met spinazie & ricotta",
         category: "Avondeten",
-        time: "25 min",
+        time: "50 min",
         serves: "4 personen (avondeten + 1 lunch)",
         ingredients: [
-            "400 g pasta (rigatoni, penne of fusilli)",
-            "400 g spinazie",
+            "12 cannelloni",
+            "400 g spinazie, geslonken en uitgeknepen",
             "500 g ricotta",
-            "2 teentjes knoflook",
-            "1 blik gepelde tomaten",
+            "1 ei",
             "50 g parmezaan",
-            "Snufje nootmuskaat, zout, peper",
-            "Olijfolie, verse basilicum"
+            "Nootmuskaat, zout, peper",
+            "2 blikken gepelde tomaten + 1 teentje knoflook + olijfolie (voor de saus)",
+            "100 g geraspte mozzarella"
         ],
         method: [
-            "Kook de pasta beetgaar. Houd 1 kopje kookwater achter.",
-            "Bak de knoflook kort in olijfolie, voeg de tomaten toe en laat 10 min sudderen tot een saus. Laat er de spinazie in slinken.",
-            "Meng in een kom de ricotta met nootmuskaat, zout en peper.",
-            "Giet de pasta af, hussel met de tomatensaus en de ricottamix. Voeg wat kookwater toe voor een romige saus.",
-            "Werk af met parmezaan en verse basilicum."
-        ],
-        note: "Dezelfde smaken als cannelloni — spinazie, ricotta, tomatensaus — maar klaar in 25 minuten en volledig op het vuur."
+            "Meng spinazie, ricotta, ei, parmezaan en nootmuskaat.",
+            "Spuit in de cannelloni.",
+            "Maak een snelle tomatensaus.",
+            "Verdeel saus over de bodem van een ovenschotel, leg de cannelloni erop, nog saus, dan mozzarella.",
+            "Bak 30 min op 200 °C."
+        ]
     },
     tacos: {
         name: "Taco's met zoete aardappel & zwarte bonen",
@@ -1367,7 +1391,7 @@ const RECIPES = {
             "Optioneel: salsa van tomaat & rode ui"
         ],
         method: [
-            "Bak de zoete aardappel met kruiden in de airfryer op 200 °C gedurende 18 min (schud halverwege). Geen airfryer? Bak in een pan met deksel op middelhoog vuur ±20 min tot gaar en licht goudbruin.",
+            "Rooster de zoete aardappel met kruiden 25 min op 200 °C.",
             "Verwarm de zwarte bonen.",
             "Vul de tortilla's met zoete aardappel, bonen, rode ui, koriander, een lepel yoghurt en geraspte kaas.",
             "Knijp er limoen over."
@@ -1453,14 +1477,14 @@ const RECIPES = {
         ],
         method: [
             "Bestrooi de aubergineplakken met zout, laat 20 min staan, dep droog.",
-            "Bestrijk met olie en rooster in de airfryer op 200 °C gedurende 10–12 min per batch. Geen airfryer? Grill in een grillpan of koekenpan op hoog vuur, 3–4 min per kant, tot goudbruin.",
+            "Bestrijk met olie en rooster op 220 °C tot goudbruin (15 min).",
             "Maak de tomatensaus.",
-            "Stapel in een brede pan: saus, aubergine, mozzarella, parmezaan — herhaal. Dek de pan af.",
-            "Verhit op laag vuur ±20 min tot de kaas gesmolten is en alles goed warm."
+            "Stapel laag voor laag: saus, aubergine, mozzarella, parmezaan — herhaal.",
+            "Bak 25 min op 200 °C."
         ]
     },
     pizza: {
-        name: "Koekenpan-pizza margherita",
+        name: "Pizza margherita (zelfgemaakt)",
         category: "Avondeten",
         time: "1 u 30 (grotendeels rijstijd)",
         serves: "2 personen",
@@ -1472,13 +1496,11 @@ const RECIPES = {
         ],
         method: [
             "Meng het deeg, kneed 8 min. Laat 1 u rijzen.",
-            "Verdeel in 2, rol dun uit — iets kleiner dan je koekenpan.",
-            "Verwarm een grote koekenpan (liefst gietijzer) op hoog vuur zonder olie.",
-            "Leg het deeg erin, bak 3–4 min tot de onderkant goudbruin is en er belletjes verschijnen.",
-            "Draai het vuur laag. Beleg snel met saus en mozzarella. Dek af met een deksel en bak nog 3–4 min tot de kaas gesmolten is.",
-            "Werk af met verse basilicum en een scheut olijfolie."
-        ],
-        note: "Koekenpan-pizza geeft een heerlijk knapperige bodem — soms zelfs beter dan uit de oven!"
+            "Verdeel in 2, rol dun uit.",
+            "Beleg met saus en stukjes mozzarella.",
+            "Bak op de hoogste oventemperatuur (240–260 °C) gedurende 8–10 min op een hete bakplaat.",
+            "Werk na het bakken af met verse basilicum."
+        ]
     },
     chickpeaCurry: {
         name: "Kikkererwtencurry met rijst",
@@ -1973,13 +1995,208 @@ document.getElementById("printShop").addEventListener("click", () => {
 });
 
 /* ============================
+   WEEKLY SHOPPING
+   ============================ */
+
+// Per recipe: shopping items grouped by category.
+// Pure pantry staples (oil, salt, spices, vinegar) are intentionally left out —
+// these belong on the separate "Voorraadlijst" tab.
+const RECIPE_SHOP = {
+    oats: { "Droogwaren": ["Havervlokken"], "Zuivel & eieren": ["Melk", "Griekse yoghurt"], "Groenten & fruit": ["Bananen"] },
+    yogurt: { "Zuivel & eieren": ["Griekse yoghurt"], "Groenten & fruit": ["Verse bessen"], "Droogwaren": ["Granola"] },
+    tomatoToast: { "Brood": ["Zuurdesembrood"], "Zuivel & eieren": ["Mozzarella", "Eieren"], "Groenten & fruit": ["Trostomaten", "Verse basilicum"] },
+    omelette: { "Zuivel & eieren": ["Eieren", "Feta"], "Groenten & fruit": ["Spinazie"] },
+    smoothie: { "Groenten & fruit": ["Bananen", "Diepvries bessen"], "Zuivel & eieren": ["Melk"], "Droogwaren": ["Granola"] },
+    pancakes: { "Droogwaren": ["Bloem", "Bakpoeder"], "Zuivel & eieren": ["Eieren", "Melk", "Griekse yoghurt"], "Groenten & fruit": ["Verse bessen"] },
+    scrambledEggs: { "Zuivel & eieren": ["Eieren", "Melk"], "Brood": ["Zuurdesembrood"] },
+    shakshuka: { "Groenten & fruit": ["Ui", "Rode paprika", "Knoflook", "Verse peterselie"], "Conserven": ["Gepelde tomaten"], "Zuivel & eieren": ["Eieren", "Feta"] },
+    capreseSalad: { "Droogwaren": ["Pasta (penne/fusilli)"], "Zuivel & eieren": ["Mozzarella"], "Groenten & fruit": ["Kerstomaten", "Verse basilicum", "Knoflook"] },
+    tomatoSoup: { "Groenten & fruit": ["Ui", "Wortel", "Selderij", "Knoflook", "Verse basilicum"], "Conserven": ["Geroosterde paprika (pot)", "Gepelde tomaten"] },
+    hummusWrap: { "Droogwaren": ["Wraps / tortilla's"], "Plantaardig": ["Hummus"], "Groenten & fruit": ["Wortel", "Komkommer", "Spinazie", "Paprika", "Citroen"] },
+    capreseToast: { "Brood": ["Zuurdesembrood"], "Zuivel & eieren": ["Mozzarella"], "Groenten & fruit": ["Trostomaten", "Verse basilicum"] },
+    buddhaBowl: { "Droogwaren": ["Quinoa"], "Conserven": ["Kikkererwten"], "Plantaardig": ["Hummus", "Tahin"], "Groenten & fruit": ["Zoete aardappel", "Spinazie", "Komkommer", "Wortel", "Kerstomaten", "Citroen", "Knoflook"] },
+    greekSalad: { "Zuivel & eieren": ["Feta"], "Groenten & fruit": ["Komkommer", "Tomaat", "Rode ui", "Paprika"] },
+    chili: { "Groenten & fruit": ["Ui", "Paprika", "Knoflook"], "Conserven": ["Kidneybonen", "Zwarte bonen", "Gepelde tomaten", "Tomatenpuree"], "Droogwaren": ["Zilvervliesrijst"] },
+    courgetteRisotto: { "Droogwaren": ["Arboriorijst"], "Groenten & fruit": ["Courgette", "Ui", "Knoflook", "Spinazie", "Citroen"], "Zuivel & eieren": ["Parmezaan", "Boter"] },
+    pumpkinRisotto: { "Droogwaren": ["Arboriorijst"], "Groenten & fruit": ["Pompoen (butternut)", "Ui", "Knoflook", "Verse salie"], "Zuivel & eieren": ["Parmezaan", "Boter"] },
+    halloumiBake: { "Groenten & fruit": ["Courgette", "Paprika", "Rode ui", "Zoete aardappel", "Citroen"], "Zuivel & eieren": ["Halloumi"] },
+    cannelloni: { "Droogwaren": ["Cannelloni"], "Groenten & fruit": ["Spinazie", "Knoflook"], "Zuivel & eieren": ["Ricotta", "Eieren", "Parmezaan", "Mozzarella"], "Conserven": ["Gepelde tomaten"] },
+    tacos: { "Droogwaren": ["Tortilla's (klein)"], "Conserven": ["Zwarte bonen"], "Groenten & fruit": ["Zoete aardappel", "Limoen", "Verse koriander", "Rode ui"], "Zuivel & eieren": ["Griekse yoghurt", "Geraspte kaas"] },
+    beanBolognese: { "Droogwaren": ["Pasta (spaghetti)", "Walnoten"], "Groenten & fruit": ["Ui", "Wortel", "Selderij", "Knoflook"], "Conserven": ["Zwarte bonen", "Cannellinibonen", "Gepelde tomaten", "Tomatenpuree"], "Zuivel & eieren": ["Parmezaan"] },
+    thaiCurry: { "Plantaardig": ["Tofu"], "Conserven": ["Rode currypasta", "Kokosmelk"], "Groenten & fruit": ["Paprika", "Courgette", "Spinazie", "Limoen"], "Droogwaren": ["Jasmijnrijst"] },
+    stirfry: { "Droogwaren": ["Noedels"], "Groenten & fruit": ["Paprika", "Broccoli", "Wortel", "Courgette", "Knoflook", "Gember"] },
+    parmigiana: { "Groenten & fruit": ["Aubergine", "Knoflook", "Verse basilicum"], "Conserven": ["Gepelde tomaten"], "Zuivel & eieren": ["Mozzarella", "Parmezaan"] },
+    pizza: { "Droogwaren": ["Pizzabloem", "Gedroogde gist"], "Conserven": ["Tomatenpassata"], "Zuivel & eieren": ["Mozzarella"], "Groenten & fruit": ["Verse basilicum"] },
+    chickpeaCurry: { "Groenten & fruit": ["Ui", "Knoflook", "Gember", "Spinazie"], "Conserven": ["Kikkererwten", "Gepelde tomaten", "Kokosmelk"], "Droogwaren": ["Basmatirijst"] }
+};
+
+const SHOP_CAT_ORDER = ["Groenten & fruit", "Zuivel & eieren", "Plantaardig", "Conserven", "Droogwaren", "Brood"];
+
+let weekShopStart = null; // Date object, Monday of selected week
+
+function getMondayOf(date) {
+    const d = new Date(date);
+    const day = d.getDay();
+    const diff = day === 0 ? -6 : 1 - day;
+    d.setDate(d.getDate() + diff);
+    d.setHours(0, 0, 0, 0);
+    return d;
+}
+
+function initWeekShop() {
+    const t = today();
+    const planStart = formatDate("2026-05-20");
+    const planEnd = formatDate("2026-06-18");
+    let ref = t;
+    if (t < planStart) ref = planStart;
+    if (t > planEnd) ref = planEnd;
+    weekShopStart = getMondayOf(ref);
+}
+
+function buildWeekShopList() {
+    // Collect the 7 dates of the week
+    const items = {}; // category -> Map(item -> {count, recipes:Set})
+    let mealCount = 0;
+
+    for (let i = 0; i < 7; i++) {
+        const d = new Date(weekShopStart);
+        d.setDate(weekShopStart.getDate() + i);
+        const meal = getMealForDate(dateToStr(d));
+        if (!meal) continue;
+
+        const recipeKeys = [meal.breakfast, meal.dinner];
+        // Leftover lunches need no extra shopping
+        if (!meal.lunchIsLeftover) recipeKeys.push(meal.lunch);
+
+        recipeKeys.forEach(rk => {
+            mealCount++;
+            const shop = RECIPE_SHOP[rk];
+            if (!shop) return;
+            Object.entries(shop).forEach(([cat, list]) => {
+                if (!items[cat]) items[cat] = new Map();
+                list.forEach(it => {
+                    if (!items[cat].has(it)) items[cat].set(it, { count: 0, recipes: new Set() });
+                    const entry = items[cat].get(it);
+                    entry.count++;
+                    entry.recipes.add(RECIPES[rk].name);
+                });
+            });
+        });
+    }
+    return { items, mealCount };
+}
+
+function weekShopKey() {
+    return "ws_" + dateToStr(weekShopStart);
+}
+
+function renderWeekShop() {
+    const label = document.getElementById("weekRangeLabel");
+    const grid = document.getElementById("weekShopGrid");
+    const end = new Date(weekShopStart);
+    end.setDate(weekShopStart.getDate() + 6);
+
+    const fmt = (d) => `${d.getDate()} ${MONTH_NAMES_NL[d.getMonth()].toLowerCase().slice(0,3)}`;
+    label.textContent = `${fmt(weekShopStart)} – ${fmt(end)}`;
+
+    const { items } = buildWeekShopList();
+    const wkKey = weekShopKey();
+    grid.innerHTML = "";
+
+    let total = 0, checked = 0;
+
+    const cats = SHOP_CAT_ORDER.filter(c => items[c]);
+    if (cats.length === 0) {
+        grid.innerHTML = `<p style="font-family:'Fraunces',serif;font-style:italic;color:var(--ink-soft);">Geen maaltijden gepland in deze week.</p>`;
+        document.getElementById("weekShopProgress").innerHTML = `<strong>0</strong> van 0 gevonkt`;
+        return;
+    }
+
+    cats.forEach(cat => {
+        const map = items[cat];
+        const entries = Array.from(map.entries()).sort((a, b) => a[0].localeCompare(b[0], 'nl'));
+        let catChecked = 0;
+
+        const cat_el = document.createElement("div");
+        cat_el.className = "shopping-category";
+
+        const listHtml = entries.map(([item, info]) => {
+            const key = `${wkKey}::${cat}::${item}`;
+            const isChecked = state.checked.has(key);
+            if (isChecked) catChecked++;
+            total++;
+            if (isChecked) checked++;
+            const qty = info.count > 1 ? ` <span style="color:var(--rust);font-family:'JetBrains Mono',monospace;font-size:11px;">×${info.count}</span>` : "";
+            const recipeList = Array.from(info.recipes).join(", ");
+            return `
+                <li class="shop-item ${isChecked ? 'checked' : ''}" data-key="${key}" title="${recipeList}">
+                    <div class="shop-checkbox"></div>
+                    <div class="shop-label">${item}${qty}</div>
+                </li>`;
+        }).join("");
+
+        cat_el.innerHTML = `
+            <div class="category-header">
+                <div class="category-title">${cat}</div>
+                <div class="category-count">${catChecked}/${entries.length}</div>
+            </div>
+            <ul class="shop-list">${listHtml}</ul>
+        `;
+        grid.appendChild(cat_el);
+    });
+
+    grid.querySelectorAll(".shop-item").forEach(item => {
+        item.addEventListener("click", () => {
+            const key = item.dataset.key;
+            if (state.checked.has(key)) state.checked.delete(key);
+            else state.checked.add(key);
+            saveState();
+            renderWeekShop();
+        });
+    });
+
+    document.getElementById("weekShopProgress").innerHTML =
+        `<strong>${checked}</strong> van ${total} gevonkt`;
+}
+
+document.getElementById("prevWeek").addEventListener("click", () => {
+    weekShopStart.setDate(weekShopStart.getDate() - 7);
+    weekShopStart = new Date(weekShopStart);
+    renderWeekShop();
+});
+
+document.getElementById("nextWeek").addEventListener("click", () => {
+    weekShopStart.setDate(weekShopStart.getDate() + 7);
+    weekShopStart = new Date(weekShopStart);
+    renderWeekShop();
+});
+
+document.getElementById("resetWeekShop").addEventListener("click", () => {
+    if (confirm("Vinkjes van deze week wissen?")) {
+        const wkKey = weekShopKey();
+        Array.from(state.checked).forEach(k => {
+            if (k.startsWith(wkKey + "::")) state.checked.delete(k);
+        });
+        saveState();
+        renderWeekShop();
+    }
+});
+
+document.getElementById("printWeekShop").addEventListener("click", () => {
+    window.print();
+});
+
+/* ============================
    INIT
    ============================ */
+
+initWeekShop();
 
 renderTodayLabel();
 renderWeekView();
 renderCalendar();
 renderRecipes();
+renderWeekShop();
 renderShopping();
 </script>
 
